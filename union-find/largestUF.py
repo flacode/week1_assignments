@@ -1,4 +1,4 @@
-"""Returning the largest element from a component"""
+"""Returning the largest element from a component containing p"""
 class LargestItemComponent:
 	def __init__(self, N):
 		self.count=N
