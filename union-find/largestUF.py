@@ -4,14 +4,22 @@ and a sequence of requests of the following form:
 • Remove x from S
 • Find the successor of x: the smallest y in S such that y ≥ x.
 Design a data type so that all operations (except construction) should take
-logarithmic time or better. 
+logarithmic time or better.
+
+O(MlogN).
+Solution.
+1.using weighted union-find algorithm with path compression, with an list ie large to keep track of the largest elements
+2.for each union, update the value of largest element in that component.
+3.Add a method to return largest element in a component
+
+
 """
 class LargestItemComponent:
 	def __init__(self, N):
 		self.count=N
-		self.id=list(range(N))
-		self.sz=[1]*N
-		self.large=list(range(N))
+		self.id=list(range(N))#initial list of connevted components
+		self.sz=[1]*N#initially each component has only one element, itself
+		self.large=list(range(N))#list to keep track of the largest element in each connected component.
 
 
 	def root(self, p):
@@ -43,6 +51,7 @@ class LargestItemComponent:
 	def count_comp(self):
 		return self.count
 
+	"""Returns the largest element in the component, where it looks for the value of the root of p in the list large"""
 	def largest(self, p):
 		return self.large[self.root(p)]
 
