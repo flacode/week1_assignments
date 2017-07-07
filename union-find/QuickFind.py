@@ -3,33 +3,22 @@ import time
 class QuickFindUF:
 	def __init__(self, N):
 		self.count=N #initial number of components
-		self.components=list(range(N)) #list of connected components
-
-	def find(self, p):
-                return self.components[p]
-
+		self.id=list(range(N)) #list of components
 
 	def no_of_components(self):
 		return self.count
 
 	def connected(self, p, q):
-		return self.find(p) == self.find(q)
+		return self.id[p] == self.id[q]
 
 	def union(self, p, q):
-		pId=self.find(p)
-		qId=self.find(q)
-
-		if pId==qId:
-			return
-		else:
-			for i in range(len(self.components)):
-				if self.components[i]==pId:
-					self.components[i]=qId
-			self.count=self.count-1 #has to be outside the loop because only two components merged to make 1
-
-	def find(self, p):
-		return self.components[p]
-
+		pId=self.id[p]
+		qId=self.id[q]
+		
+		for i in range(len(self.id)):
+			if self.id[i]==pId:
+				self.id[i]=qId
+		self.count=self.count-1 #has to be outside the loop because only two components merged to make 1
 	
 if __name__=='__main__':
 	files=['tinyUF.txt', 'mediumUF.txt', 'largeUF.txt']
