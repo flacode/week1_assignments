@@ -1,5 +1,7 @@
-"""This algorithm is flat, but it is expensive to keep trees flat in union. N^2 array accesses"""
-import time
+"""This algorithm is flat, but it is expensive to keep trees flat in union. N^2 array accesses
+   Change all objects whise id equals to id[p] to id[q]
+"""
+
 class QuickFindUF:
 	def __init__(self, N):
 		self.count=N #initial number of components
@@ -8,13 +10,12 @@ class QuickFindUF:
 	def no_of_components(self):
 		return self.count
 
-	def connected(self, p, q):
+	def connected(self, p, q):#can also be called find
 		return self.id[p] == self.id[q]
 
 	def union(self, p, q):
 		pId=self.id[p]
 		qId=self.id[q]
-		
 		for i in range(len(self.id)):
 			if self.id[i]==pId:
 				self.id[i]=qId
@@ -23,7 +24,6 @@ class QuickFindUF:
 if __name__=='__main__':
 	files=['tinyUF.txt', 'mediumUF.txt', 'largeUF.txt']
 	for file_name in files:
-		start_time=time.time()
 		with open(file_name, 'r') as f:
 			n=f.readline()
 			uf=QuickFindUF(int(n))
@@ -36,6 +36,4 @@ if __name__=='__main__':
 					if not uf.connected(p, q):
 						uf.union(p, q)
 		f.close()
-		end_time=time.time()
-		print ("The number of components is %d" %(uf.no_of_components()))
-		print ("The elapsed time for %s is %s" %(file_name, (end_time-start_time))) 
+		print ("The number of connected components is %d" %(uf.no_of_components()))
