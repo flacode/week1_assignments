@@ -1,2 +1,2 @@
-# ds_and_algorithms
+# week one assignments
 Understanding algorithms and data structures using python 3
